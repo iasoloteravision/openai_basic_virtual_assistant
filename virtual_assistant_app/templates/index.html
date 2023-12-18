@@ -1,0 +1,27 @@
+<!-- virtual_assistant_app/templates/index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Virtual Assistant</title>
+</head>
+<body style="background-color: blueviolet;">
+    <h1 style="font-family: monospace;">Virtual Assistant</h1>
+    <input type="text" id="userInput" placeholder="Type your message..." size="100">
+    <button style="background-color: rgb(240, 20, 20);" onclick="getAssistantResponse()">Ask</button><br>
+    
+    <textarea style="font-family: monospace; background-color: aquamarine;" id="assistantResponse"></textarea>
+
+    <script>
+        function getAssistantResponse() {
+            var userInput = document.getElementById('userInput').value;
+
+            fetch(`/get_response/?user_input=${userInput}`)
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('assistantResponse').innerText = data.assistant_response;
+                });
+        }
+    </script>
+</body>
+</html>
